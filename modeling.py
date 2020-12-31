@@ -659,8 +659,8 @@ def attention_layer(from_tensor,
   #   N = `num_attention_heads`
   #   H = `size_per_head`
 
-  from_tensor_2d = reshape_to_matrix(from_tensor)
-  to_tensor_2d = reshape_to_matrix(to_tensor)
+  from_tensor_2d = reshape_to_matrix(from_tensor) #[B*F, from_width]
+  to_tensor_2d = reshape_to_matrix(to_tensor) #[B*T, to_width]
 
   # `query_layer` = [B*F, N*H]
   query_layer = tf.layers.dense(
@@ -850,7 +850,7 @@ def transformer_model(input_tensor,
         else:
           # In the case where we have other sequences, we just concatenate
           # them to the self-attention head before the projection.
-          attention_output = tf.concat(attention_heads, axis=-1)
+          attention_output = tf.concat(attention_heads, axis=-1) #？有点奇怪，没看到有啥用
 
         # Run a linear projection of `hidden_size` then add a residual
         # with `layer_input`.
