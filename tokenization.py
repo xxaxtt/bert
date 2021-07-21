@@ -167,7 +167,7 @@ class FullTokenizer(object):
     self.basic_tokenizer = BasicTokenizer(do_lower_case=do_lower_case)
     self.wordpiece_tokenizer = WordpieceTokenizer(vocab=self.vocab)
 
-  def tokenize(self, text):
+  def tokenize(self, text): #使用wordpiece分词
     split_tokens = []
     for token in self.basic_tokenizer.tokenize(text):
       for sub_token in self.wordpiece_tokenizer.tokenize(token):
